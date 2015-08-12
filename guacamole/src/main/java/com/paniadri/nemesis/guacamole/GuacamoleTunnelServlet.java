@@ -1,4 +1,4 @@
-package org.glyptodon.guacamole.net.servlet;
+package com.paniadri.nemesis.guacamole;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
