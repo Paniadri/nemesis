@@ -37,7 +37,7 @@ public class VirtualMachinePrueba {
                 + "\ttarget   = \"hda\",\n"
                 + "\treadonly = \"no\" ]\n"
                 + "# NIC     = [ NETWORK = \"Non existing network\" ]\n"
-                + "FEATURES = [ acpi=\"no\" ]";
+                + "GRAPHICS = [ TYPE = \"vnc\",  LISTEN = \"0.0.0.0\"]";
 
             // You can try to uncomment the NIC line, in that case OpenNebula
             // won't be able to insert this machine in the database.
@@ -63,17 +63,19 @@ public class VirtualMachinePrueba {
             VirtualMachine vm = new VirtualMachine(newVMID, oneClient);
 
             // Let's hold the VM, so the scheduler won't try to deploy it
-            System.out.print("Trying to hold the new VM... ");
-            rc = vm.hold();
+//            System.out.print("Trying to hold the new VM... ");
+//            rc = vm.hold();
+//
+//            if(rc.isError())
+//            {
+//                System.out.println("failed!");
+//                throw new Exception( rc.getErrorMessage() );
+//            }
+//            else
+//                System.out.println("ok.");
 
-            if(rc.isError())
-            {
-                System.out.println("failed!");
-                throw new Exception( rc.getErrorMessage() );
-            }
-            else
-                System.out.println("ok.");
-
+            
+            
             // And now we can request its information.
             rc = vm.info();
 
@@ -90,6 +92,9 @@ public class VirtualMachinePrueba {
             // method).
             System.out.println("The new VM " +
                     vm.getName() + " has status: " + vm.status());
+            
+            System.out.println("The VNC PORT IS " +
+            		vm.xpath("TEMPLATE/GRAPHICS/PORT"));
 
             // And we can also use xpath expressions
             System.out.println("The path of the disk is");
@@ -125,24 +130,24 @@ public class VirtualMachinePrueba {
 
             // We have also some useful helpers for the actions you can perform
             // on a virtual machine, like cancel:
-            rc = vm.cancel();
-            System.out.println("\nTrying to cancel the VM " + vm.getId() +
-                                " (should fail)...");
-
-            // This is all the information you can get from the OneResponse:
-            System.out.println("\tOpenNebula response");
-            System.out.println("\t  Error:  " + rc.isError());
-            System.out.println("\t  Msg:    " + rc.getMessage());
-            System.out.println("\t  ErrMsg: " + rc.getErrorMessage());
-
-            rc = vm.finalizeVM();
-            System.out.println("\nTrying to finalize (delete) the VM " +
-                                vm.getId() + "...");
-
-            System.out.println("\tOpenNebula response");
-            System.out.println("\t  Error:  " + rc.isError());
-            System.out.println("\t  Msg:    " + rc.getMessage());
-            System.out.println("\t  ErrMsg: " + rc.getErrorMessage());
+//            rc = vm.shutdown();
+//            System.out.println("\nTrying to cancel the VM " + vm.getId() +
+//                                " (should fail)...");
+//
+//            // This is all the information you can get from the OneResponse:
+//            System.out.println("\tOpenNebula response");
+//            System.out.println("\t  Error:  " + rc.isError());
+//            System.out.println("\t  Msg:    " + rc.getMessage());
+//            System.out.println("\t  ErrMsg: " + rc.getErrorMessage());
+//
+//            rc = vm.delete();
+//            System.out.println("\nTrying to finalize (delete) the VM " +
+//                                vm.getId() + "...");
+//
+//            System.out.println("\tOpenNebula response");
+//            System.out.println("\t  Error:  " + rc.isError());
+//            System.out.println("\t  Msg:    " + rc.getMessage());
+//            System.out.println("\t  ErrMsg: " + rc.getErrorMessage());
 
 
         }

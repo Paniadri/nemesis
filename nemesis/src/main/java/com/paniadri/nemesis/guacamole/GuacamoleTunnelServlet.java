@@ -1,5 +1,7 @@
 package com.paniadri.nemesis.guacamole;
 
+import java.io.Serializable;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +15,7 @@ import org.glyptodon.guacamole.protocol.GuacamoleConfiguration;
 import org.glyptodon.guacamole.servlet.GuacamoleHTTPTunnelServlet;
 import org.glyptodon.guacamole.servlet.GuacamoleSession;
 
-public class GuacamoleTunnelServlet extends GuacamoleHTTPTunnelServlet {
+public class GuacamoleTunnelServlet extends GuacamoleHTTPTunnelServlet implements Serializable {
 
 	/**
 	 * 
@@ -33,7 +35,7 @@ public class GuacamoleTunnelServlet extends GuacamoleHTTPTunnelServlet {
         GuacamoleConfiguration config = new GuacamoleConfiguration();
         config.setProtocol("vnc");
         config.setParameter("hostname", "192.168.1.49");
-        config.setParameter("port", "5901");
+        config.setParameter("port", "5909");
 //        config.setParameter("password", "password");
 
         // Connect to guacd, proxying a connection to the VNC server above
