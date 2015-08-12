@@ -1,4 +1,4 @@
-package org.glyptodon.guacamole.net.example;
+package org.glyptodon.guacamole.net.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,7 +13,7 @@ import org.glyptodon.guacamole.protocol.GuacamoleConfiguration;
 import org.glyptodon.guacamole.servlet.GuacamoleHTTPTunnelServlet;
 import org.glyptodon.guacamole.servlet.GuacamoleSession;
 
-public class TutorialGuacamoleTunnelServlet extends GuacamoleHTTPTunnelServlet {
+public class GuacamoleTunnelServlet extends GuacamoleHTTPTunnelServlet {
 
 	/**
 	 * 
