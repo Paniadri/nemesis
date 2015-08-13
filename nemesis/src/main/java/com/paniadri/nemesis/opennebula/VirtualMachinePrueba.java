@@ -131,7 +131,7 @@ public class VirtualMachinePrueba {
             // We have also some useful helpers for the actions you can perform
             // on a virtual machine, like cancel:
 //            rc = vm.shutdown();
-//            System.out.println("\nTrying to cancel the VM " + vm.getId() +
+//            System.out.println("\nTrying to shutdown the VM " + vm.getId() +
 //                                " (should fail)...");
 //
 //            // This is all the information you can get from the OneResponse:
@@ -141,7 +141,7 @@ public class VirtualMachinePrueba {
 //            System.out.println("\t  ErrMsg: " + rc.getErrorMessage());
 //
 //            rc = vm.delete();
-//            System.out.println("\nTrying to finalize (delete) the VM " +
+//            System.out.println("\nTrying to delete the VM " +
 //                                vm.getId() + "...");
 //
 //            System.out.println("\tOpenNebula response");

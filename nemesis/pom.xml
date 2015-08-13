@@ -55,12 +55,11 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Main Guacamole library -->
+        <!-- Guacamole Java API -->
         <dependency>
             <groupId>org.glyptodon.guacamole</groupId>
             <artifactId>guacamole-common</artifactId>
             <version>0.9.7</version>
-            <scope>compile</scope>
         </dependency>
 
         <!-- Guacamole JavaScript library -->

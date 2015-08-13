@@ -21,26 +21,49 @@ public class GuacamoleTunnelServlet extends GuacamoleHTTPTunnelServlet implement
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+//	public static final StringGuacamoleProperty PORT = new StringGuacamoleProperty() {
+//
+//        @Override
+//        public String getName() { return "port"; }
+//
+//    };
+//
+//    /**
+//     * The directory to search for authentication provider classes.
+//     */
+//    public static final StringGuacamoleProperty DIRECCION_IP = new StringGuacamoleProperty() {
+//
+//        @Override
+//        public String getName() { return "direccion-ip"; }
+//
+//    };
+	
+	
 	@Override
     protected GuacamoleTunnel doConnect(HttpServletRequest request) throws GuacamoleException {
 
         HttpSession httpSession = request.getSession(true);
-
+        
         // guacd connection information
         String hostname = "localhost"; //ejecuto el demonio guacd en el propio ordenador
-        int port = 4822;
-
+        int guacdPort = 4822;
+        
         // VNC connection information
+        
+        // Retrieve ip and port from parms
+        String direccion = request.getParameter("direccion");
+        String port = request.getParameter("port");
+        
         GuacamoleConfiguration config = new GuacamoleConfiguration();
         config.setProtocol("vnc");
         config.setParameter("hostname", "192.168.1.49");
-        config.setParameter("port", "5909");
+        config.setParameter("port", port);
 //        config.setParameter("password", "password");
-
+        
         // Connect to guacd, proxying a connection to the VNC server above
         GuacamoleSocket socket = new ConfiguredGuacamoleSocket(
-                new InetGuacamoleSocket(hostname, port),
+                new InetGuacamoleSocket(hostname, guacdPort),
                 config
         );
 
