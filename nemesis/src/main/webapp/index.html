@@ -3,8 +3,7 @@
 <html>
 
     <head>
-<!--         <link rel="stylesheet" type="text/css" href="guacamole.css"/> -->
-        <title>Guacamole (EXAMPLE)</title>
+        <title>Guacamole</title>
     </head>
 
     <body>
@@ -20,7 +19,7 @@
 	               </tr>
 	               <tr>
 	                   <th>Puerto</th>
-	                   <td><input type="number" name="port" id="port" value="5910" autofocus="autofocus"/></td>
+	                   <td><input type="number" name="port" id="port" value="5911" autofocus="autofocus"/></td>
 	               </tr>
 	           </table>
 	
@@ -28,94 +27,27 @@
 	
 	       <div id="buttons">
 	           <input type="button" name="conexion" id="conexion" value="Conexion"/>
-	           <input type="button" name="desconexion" id="desconexion" value="Desconexion"/>
 	       </div>
 	
 	   </form>
 	   
-	   
-	    <!-- Display -->
-        <div id="display"></div>
-	   
-	   
-	   
-	   <!-- Guacamole JavaScript API -->
-        <script type="text/javascript"
-            src="guacamole-common-js/all.min.js"></script>
 	   
 	   <!-- Init -->
         <script type="text/javascript"> /* <![CDATA[ */
 	   
 	   var conexionForm = document.getElementById("conexion-form");
         
-	   var direccion = document.getElementById("direccion");
-       var port = document.getElementById("port");
-       var data =
-              "direccion=" + encodeURIComponent(direccion.value)
-           + "&port=" + encodeURIComponent(port.value)
-        
-        
-        
-		// Get display div from document
-       var display = document.getElementById("display");
-        
-    	// Instantiate client, using an HTTP tunnel for communications.
-       var guac = new Guacamole.Client(
-           new Guacamole.HTTPTunnel("tunnel")
-       );
-    	
-   		// Add client to display div
-       display.appendChild(guac.getDisplay().getElement());
-    	
-//        guac.connect(data);
-   		
-    	// Error handler
-       guac.onerror = function(error) {
-           alert(error);
-       };
-   		
-   		 // Disconnect on close
-       window.onunload = function() {
-           guac.disconnect();
-       }
-   		 
-    	// Mouse
-       var mouse = new Guacamole.Mouse(guac.getDisplay().getElement());
-       mouse.onmousedown = 
-       mouse.onmouseup   =
-       mouse.onmousemove = function(mouseState) {
-           guac.sendMouseState(mouseState);
-       };
-       // Keyboard
-       var keyboard = new Guacamole.Keyboard(document);
-       keyboard.onkeydown = function (keysym) {
-           guac.sendKeyEvent(1, keysym);
-       };
-       keyboard.onkeyup = function (keysym) {
-           guac.sendKeyEvent(0, keysym);
-       };
-		
-        
-       conexionForm.onclick = function() {
+       conexion.onclick = function() {
     	   
-    	   guac.disconnect();
-    	   
-           direccion = document.getElementById("direccion");
-           port = document.getElementById("port");
-           data =
+    	   var direccion = document.getElementById("direccion");
+           var port = document.getElementById("port");
+           var data =
                   "direccion=" + encodeURIComponent(direccion.value)
                + "&port=" + encodeURIComponent(port.value)
-               
-               // Connect
-               guac.connect(data);
-           
+    	   
+    	   window.open("client.html?" + data);
        }
        
-		desconexionForm.onclick = function() {
-			
-    	   guac.disconnect();
-    	   
-		}
             
         /* ]]> */ </script>
 

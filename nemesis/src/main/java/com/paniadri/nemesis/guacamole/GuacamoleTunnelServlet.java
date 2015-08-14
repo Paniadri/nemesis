@@ -50,14 +50,13 @@ public class GuacamoleTunnelServlet extends GuacamoleHTTPTunnelServlet implement
         int guacdPort = 4822;
         
         // VNC connection information
-        
-        // Retrieve ip and port from parms
+        // Retrieve ip and port from params
         String direccion = request.getParameter("direccion");
         String port = request.getParameter("port");
         
         GuacamoleConfiguration config = new GuacamoleConfiguration();
         config.setProtocol("vnc");
-        config.setParameter("hostname", "192.168.1.49");
+        config.setParameter("hostname", direccion);
         config.setParameter("port", port);
 //        config.setParameter("password", "password");
         
