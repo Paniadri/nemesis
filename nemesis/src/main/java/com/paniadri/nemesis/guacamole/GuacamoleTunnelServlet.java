@@ -22,24 +22,6 @@ public class GuacamoleTunnelServlet extends GuacamoleHTTPTunnelServlet implement
 	 */
 	private static final long serialVersionUID = 1L;
 	
-//	public static final StringGuacamoleProperty PORT = new StringGuacamoleProperty() {
-//
-//        @Override
-//        public String getName() { return "port"; }
-//
-//    };
-//
-//    /**
-//     * The directory to search for authentication provider classes.
-//     */
-//    public static final StringGuacamoleProperty DIRECCION_IP = new StringGuacamoleProperty() {
-//
-//        @Override
-//        public String getName() { return "direccion-ip"; }
-//
-//    };
-	
-	
 	@Override
     protected GuacamoleTunnel doConnect(HttpServletRequest request) throws GuacamoleException {
 

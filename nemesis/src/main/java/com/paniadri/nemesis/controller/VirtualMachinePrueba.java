@@ -1,4 +1,4 @@
-package com.paniadri.nemesis.opennebula;
+package com.paniadri.nemesis.controller;
 
 import org.opennebula.client.Client;
 import org.opennebula.client.OneResponse;
@@ -63,16 +63,16 @@ public class VirtualMachinePrueba {
             VirtualMachine vm = new VirtualMachine(newVMID, oneClient);
 
             // Let's hold the VM, so the scheduler won't try to deploy it
-//            System.out.print("Trying to hold the new VM... ");
-//            rc = vm.hold();
-//
-//            if(rc.isError())
-//            {
-//                System.out.println("failed!");
-//                throw new Exception( rc.getErrorMessage() );
-//            }
-//            else
-//                System.out.println("ok.");
+            System.out.print("Trying to hold the new VM... ");
+            rc = vm.hold();
+
+            if(rc.isError())
+            {
+                System.out.println("failed!");
+                throw new Exception( rc.getErrorMessage() );
+            }
+            else
+                System.out.println("ok.");
 
             
             
@@ -130,24 +130,24 @@ public class VirtualMachinePrueba {
 
             // We have also some useful helpers for the actions you can perform
             // on a virtual machine, like cancel:
-//            rc = vm.shutdown();
-//            System.out.println("\nTrying to shutdown the VM " + vm.getId() +
-//                                " (should fail)...");
-//
-//            // This is all the information you can get from the OneResponse:
-//            System.out.println("\tOpenNebula response");
-//            System.out.println("\t  Error:  " + rc.isError());
-//            System.out.println("\t  Msg:    " + rc.getMessage());
-//            System.out.println("\t  ErrMsg: " + rc.getErrorMessage());
-//
-//            rc = vm.delete();
-//            System.out.println("\nTrying to delete the VM " +
-//                                vm.getId() + "...");
-//
-//            System.out.println("\tOpenNebula response");
-//            System.out.println("\t  Error:  " + rc.isError());
-//            System.out.println("\t  Msg:    " + rc.getMessage());
-//            System.out.println("\t  ErrMsg: " + rc.getErrorMessage());
+            rc = vm.shutdown();
+            System.out.println("\nTrying to shutdown the VM " + vm.getId() +
+                                " (should fail)...");
+
+            // This is all the information you can get from the OneResponse:
+            System.out.println("\tOpenNebula response");
+            System.out.println("\t  Error:  " + rc.isError());
+            System.out.println("\t  Msg:    " + rc.getMessage());
+            System.out.println("\t  ErrMsg: " + rc.getErrorMessage());
+
+            rc = vm.delete();
+            System.out.println("\nTrying to delete the VM " +
+                                vm.getId() + "...");
+
+            System.out.println("\tOpenNebula response");
+            System.out.println("\t  Error:  " + rc.isError());
+            System.out.println("\t  Msg:    " + rc.getMessage());
+            System.out.println("\t  ErrMsg: " + rc.getErrorMessage());
 
 
         }
