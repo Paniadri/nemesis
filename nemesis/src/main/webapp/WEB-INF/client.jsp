@@ -1,15 +1,18 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
-	<meta charset="UTF-8">
 	<title>VM</title>
 </head>
 <body>
 
-		<!-- Guacamole JavaScript API -->
         <script type="text/javascript"
             src="guacamole-common-js/all.min.js"></script>
+
+		<h3>Máquina</h3>
 
 		<!-- Display -->
         <div id="display"></div>
@@ -28,7 +31,8 @@
        display.appendChild(guac.getDisplay().getElement());
     
    		//ver a que nos conectamos
-       var data= window.location.search.substring(1);
+       var data= "direccion=" + "${direccion}"
+       + "&puerto=" + "${puerto}"
        // Connect client
        guac.connect(data);	
    	

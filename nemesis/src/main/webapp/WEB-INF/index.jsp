@@ -33,11 +33,42 @@
     <tr>
         <td colspan="2">
             <input type="submit" />
+            
         </td>
     </tr>
-</table> 
-</form:form>
+    </table> 
+ 	</form:form>   
     
+    <h3>Conexion</h3>
+    <table>
+    <tr>
+    	<td><label>Direccion:</label></td>
+        <td><input  id="direccion" /></td>
+    </tr>
+    <tr>
+    	<td><label>Puerto:</label></td>
+        <td><input name="puerto" id="puerto"/></td>
+    </tr>
+    <tr>
+      <td><input type="button" name="conexion" id="conexion" value="Conexion"/></td>
+    </tr>
+    </table>
+
+
+        <script type="text/javascript"> /* <![CDATA[ */
+	   
+       conexion.onclick = function() {
+    	   
+    	   var direccion = document.getElementById("direccion");
+           var puerto = document.getElementById("puerto");
+           var data =
+                  "direccion=" + encodeURIComponent(direccion.value)
+               + "&puerto=" + encodeURIComponent(puerto.value)
+    	   
+    	   window.open("mostrar?" + data);
+       }
+       
+        /* ]]> */ </script>
     
 </body>
 </html>

@@ -24,14 +24,24 @@
 	<!-- Aquí indicamos la ruta donde el dispatcher estará escuchando, en este caso la raíz de la web(/), o el tunnel
 		en el caso de guacamole. -->
  	
+	<servlet-mapping>
+	    <servlet-name>Tunnel</servlet-name>
+	    <url-pattern>/tunnel</url-pattern>
+ 	</servlet-mapping>
+ 	
+ 	<servlet-mapping>
+	  <servlet-name>default</servlet-name>
+	  <url-pattern>*.css</url-pattern>
+	 </servlet-mapping>
+	
+	 <servlet-mapping>
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>*.js</url-pattern>
+	 </servlet-mapping>
+
  	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
  	
- 	<servlet-mapping>
-    <servlet-name>Tunnel</servlet-name>
-    <url-pattern>/tunnel</url-pattern>
- 	</servlet-mapping>
- 
 </web-app>

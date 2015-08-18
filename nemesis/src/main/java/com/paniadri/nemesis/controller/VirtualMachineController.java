@@ -3,19 +3,19 @@ package com.paniadri.nemesis.controller;
 
 import java.util.List;
 
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.paniadri.nemesis.model.VirtualMachineModel;
 import com.paniadri.nemesis.service.VirtualMachineService;
 
 @Controller
-@RequestMapping("/")
 public class VirtualMachineController{
 	
 	private static Log log = LogFactory.getLog(VirtualMachineController.class);
@@ -24,7 +24,7 @@ public class VirtualMachineController{
 	private VirtualMachineService virtualMachineService;
 	
 	//Aquí además estamos diciendo que el método usado es por petición GET.
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/")
 	public String list(Model model) {
 	
 	  //la función del método es rellenar las variables libros y libro, una con la lista de libros 
@@ -42,11 +42,15 @@ public class VirtualMachineController{
 		return "index";
 	  }
 	  
-//	@RequestMapping("/addBook")
-//	public String addBook(@ModelAttribute("libro") Libro libro) {
-//		libro.setId(num);
-//		num++;
-//		libroService.insert(libro);
-//		return "redirect:/";
-//  }
+	@RequestMapping(value="/mostrar")
+	public String showClient(@RequestParam("direccion") String direccion,
+						@RequestParam("puerto") String puerto, Model model) {
+		log.info("Redireccionando a cliente guacamole");
+		
+		model.addAttribute("direccion", direccion);
+	    model.addAttribute("puerto", puerto);
+	    
+		return "client";
+  }
+	
 }
