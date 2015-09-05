@@ -5,17 +5,22 @@
 <html>
 
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>VM</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
 
         <script type="text/javascript"
             src="guacamole-common-js/all.min.js"></script>
 
-		<h3>Máquina</h3>
-
+		<div class="alert alert-info" role="alert">Conexión VNC</div>
 		<!-- Display -->
-        <div id="display"></div>
+		<div id="display"></div>
+
+				
+		
+
         <!-- Init -->
         <script type="text/javascript"> /* <![CDATA[ */
 	   
@@ -64,6 +69,7 @@
 		
         /* ]]> */ </script>
 
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 </body>
 </html>

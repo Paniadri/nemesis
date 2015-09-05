@@ -12,20 +12,32 @@ public class VirtualMachineModel {
 	
 	String name;
 	
+	String status;
 	
-
-	public VirtualMachineModel(VirtualMachine vm, String id, String port, String name) {
+	String host;
+	
+	public VirtualMachineModel(VirtualMachine vm, String id, String port, String name, String status, String host) {
 		super();
 		this.vm = vm;
 		this.id = id;
 		this.port = port;
 		this.name = name;
+		this.status = status;
+		this.host = host;
 	}
 	
-
 	public VirtualMachineModel() {
 	}
 
+	
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public VirtualMachine getVm() {
 		return vm;
@@ -57,6 +69,15 @@ public class VirtualMachineModel {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+
+	public String getHost() {
+		return host;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
 	}
 
 }

@@ -6,10 +6,10 @@ import com.paniadri.nemesis.model.VirtualMachineModel;
 
 public interface VirtualMachineService {
 
-	public void addVM();
+	public void addVM(int numeroEscenario);
 	
-	public void deleteVM();
+	public void deleteVM(int numeroVM);
 	
-	public List<VirtualMachineModel>  listVMs() throws Exception;
+	public List<VirtualMachineModel> listVMs() throws Exception;
 	
 }

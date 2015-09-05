@@ -3,15 +3,16 @@ package com.paniadri.nemesis.controller;
 
 import java.util.List;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.paniadri.nemesis.model.EscenarioModel;
 import com.paniadri.nemesis.model.VirtualMachineModel;
 import com.paniadri.nemesis.service.VirtualMachineService;
 
@@ -38,9 +39,36 @@ public class VirtualMachineController{
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
+		
+		//Para el nuevo escenario a introducir
+		model.addAttribute("escenario", new EscenarioModel());
 		model.addAttribute("vm", new VirtualMachineModel());
 		return "index";
 	  }
+	
+	
+	@RequestMapping(value="/add")
+	public String addEscenario(@ModelAttribute("escenario") EscenarioModel escenario) {
+		
+		log.info("Procediendo a añadir escenario"+escenario.getNumeroEscenario());
+		
+		virtualMachineService.addVM(escenario.getNumeroEscenario());
+		
+		return "redirect:/";
+  }
+	
+	
+	@RequestMapping(value="/delete")
+	public String deleteEscenario(@ModelAttribute("vm") VirtualMachineModel vm) {
+		
+		log.info("Procediendo a eliminar vm"+vm.getId());
+		
+		virtualMachineService.deleteVM(Integer.parseInt(vm.getId()));
+		
+		return "redirect:/";
+  }
+	
+	
 	  
 	@RequestMapping(value="/mostrar")
 	public String showClient(@RequestParam("direccion") String direccion,

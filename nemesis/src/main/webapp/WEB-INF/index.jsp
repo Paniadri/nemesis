@@ -6,56 +6,94 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>VMs</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Lista de VMs</h1>
-    <ul>
-        <c:forEach var="vm" items="${vms}">
-            <li>ID: ${vm.id} - Nombre:  ${vm.name} - Puerto: ${vm.port}</li>
-        </c:forEach>
-    </ul>
-    
-    <form:form method="post" action="addBook" commandName="vm">
-  
-    <table>
-    <tr>
-        <td><form:label path="id">ID:</form:label></td>
-        <td><form:input path="id" /></td>
-    </tr>
-    <tr>
-        <td><form:label path="name">Nombre:</form:label></td>
-        <td><form:input path="name" /></td>
-    </tr>
-    <tr>
-        <td><form:label path="port" >Puerto:</form:label></td>
-        <td><form:input path="port" /></td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <input type="submit" />
-            
-        </td>
-    </tr>
-    </table> 
- 	</form:form>   
-    
-    <h3>Conexion</h3>
-    <table>
-    <tr>
-    	<td><label>Direccion:</label></td>
-        <td><input  id="direccion" /></td>
-    </tr>
-    <tr>
-    	<td><label>Puerto:</label></td>
-        <td><input name="puerto" id="puerto"/></td>
-    </tr>
-    <tr>
-      <td><input type="button" name="conexion" id="conexion" value="Conexion"/></td>
-    </tr>
-    </table>
 
+    <div class="panel panel-primary">
+	  <!-- Default panel contents -->
+	  <div class="panel-heading">
+		  <h4 style="display:inline">VMs disponibles</h4>
+		  <button style="display:inline; margin-left: 20px" onclick="window.location='/nemesis/'"  class="btn btn-default">Actualizar Tabla</button>
+	  </div>
 
-        <script type="text/javascript"> /* <![CDATA[ */
+	  <table class="table table-striped">
+	    <thead>
+		  <tr>
+		     <th>ID</th>
+		     <th>Nombre</th>
+		     <th>Status</th>
+		     <th>Puerto</th>
+		     <th>Hostname</th>
+		  </tr>
+		 </thead>
+		 <tbody>
+	        <c:forEach var="vm" items="${vms}">
+	        	<tr>
+		            <td>${vm.id}</td>
+		            <td>${vm.name}</td>
+		            <td>${vm.status}</td>
+		            <td>${vm.port}</td>
+		            <td>${vm.host}</td>
+	            </tr>
+	        </c:forEach>
+	     </tbody>
+	  </table>
+	</div>
+	
+	
+	 <div class="panel panel-default">
+	  <div class="panel-heading">Nuevo escenario</div>
+	  <div class="panel-body">
+		  <form:form class="form-inline" method="post" action="add" commandName="escenario">
+	    	<div class="form-group">
+			  <form:radiobutton path="numeroEscenario" value="1"/> 1
+			  <form:radiobutton path="numeroEscenario" value="2"/> 2
+		 	</div>
+		 	
+		    <div class="form-group">
+			    <button type="submit" type="submit" class="btn btn-primary">Crear</button>
+		    </div>
+	 	 </form:form>   
+	  </div>
+	</div>
+	
+	<div class="panel panel-default">
+	  <div class="panel-heading">Eliminar escenario</div>
+	  <div class="panel-body">
+		<form:form class="form-inline" method="post" action="delete" commandName="vm">
+			<div class="form-group">
+				<label for="id">ID </label>
+		    	<form:select  items="${vms}" path="id" itemLabel="vm.id" itemValue="vm.id"/>
+		    </div>
+		     <div class="form-group">
+			    <button type="submit" type="submit" class="btn btn-primary">Eliminar</button>
+		    </div>
+		</form:form>
+	  </div>
+	</div>
+	
+	<div class="panel panel-info">
+		<div class="panel-heading">Conexión</div>
+		 <form class="form-inline">
+		  <div class="form-group">
+		    <label for="direccion">Direccion</label>
+	   		<input type="text" class="form-control" id="direccion" placeholder="Dirección IP">
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="puerto">Puerto</label>
+		      <input type="text" class="form-control" id="puerto" placeholder="Puerto VNC">
+		  </div>
+	
+		  <div class="form-group">
+		      <button class="btn btn-primary" name="conexion" id="conexion">Conectar</button>
+		  </div>
+		</form>
+	</div>
+	
+    
+    <script type="text/javascript"> /* <![CDATA[ */
 	   
        conexion.onclick = function() {
     	   
@@ -70,5 +108,7 @@
        
         /* ]]> */ </script>
     
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>
