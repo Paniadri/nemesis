@@ -24,12 +24,11 @@ public class VirtualMachineController{
 	@Autowired
 	private VirtualMachineService virtualMachineService;
 	
-	//Aquí además estamos diciendo que el método usado es por petición GET.
 	@RequestMapping(value="/")
 	public String list(Model model) {
 	
-	  //la función del método es rellenar las variables libros y libro, una con la lista de libros 
-	  //sacados de la base de datos, y libro para que pueda ser rellenada con los datos del formulario.
+	  //la función del método es rellenar las variables vms, vm y escenario, una con la lista de vms 
+	  //sacados de OpenNebula, y vm y escenario para que puedan ser rellenadas con los datos del formulario.
 		
 		try {
 			log.info("Leyendo lista de VMs");
@@ -40,7 +39,6 @@ public class VirtualMachineController{
 			System.err.println(e.getMessage());
 		}
 		
-		//Para el nuevo escenario a introducir
 		model.addAttribute("escenario", new EscenarioModel());
 		model.addAttribute("vm", new VirtualMachineModel());
 		return "index";
@@ -68,8 +66,15 @@ public class VirtualMachineController{
 		return "redirect:/";
   }
 	
-	
-	  
+	 
+	/**
+	 * Redirige al cliente VNC dados los parámetros del formulario de entrada
+	 * 
+	 * @param direccion
+	 * @param puerto
+	 * @param model
+	 * @return jsp correspondiente al cliente VNC con los datos de la conexión.
+	 */
 	@RequestMapping(value="/mostrar")
 	public String showClient(@RequestParam("direccion") String direccion,
 						@RequestParam("puerto") String puerto, Model model) {

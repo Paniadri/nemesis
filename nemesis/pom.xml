@@ -34,7 +34,7 @@
                 <version>2.6</version>
                 <configuration>
                 
-                    <!-- Add files from guacamole-common-js -->
+                    <!-- Añadir archivos de guacamole-common-js -->
                     <overlays>
                         <overlay>
                             <groupId>org.glyptodon.guacamole</groupId>
@@ -86,7 +86,7 @@
 			<version>1.7.7</version>
 		</dependency>
 		
-		<!-- 	Para opennebula API -->
+		<!-- Para opennebula API -->
 		
 		<dependency>
 			<groupId>org.opennebula.client</groupId>

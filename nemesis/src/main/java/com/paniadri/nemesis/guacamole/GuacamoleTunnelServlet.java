@@ -38,8 +38,8 @@ public class GuacamoleTunnelServlet extends GuacamoleHTTPTunnelServlet implement
         String hostname = "localhost"; //ejecuto el demonio guacd en el propio ordenador
         int guacdPort = 4822;
         
-        // VNC connection information
-        // Retrieve ip and port from params
+        // Información de la conexión VNC
+        // Extraer ip y puerto de los parámetros
         String direccion = request.getParameter("direccion");
         String puerto = request.getParameter("puerto");
         
@@ -50,16 +50,16 @@ public class GuacamoleTunnelServlet extends GuacamoleHTTPTunnelServlet implement
         config.setParameter("hostname", direccion);
         config.setParameter("port", puerto);
         
-        // Connect to guacd, proxying a connection to the VNC server above
+        // Conectar a guacd, haciendo de proxy para el servidor VNC
         GuacamoleSocket socket = new ConfiguredGuacamoleSocket(
                 new InetGuacamoleSocket(hostname, guacdPort),
                 config
         );
 
-        // Create tunnel from now-configured socket
+        // Crear el tunel en el socket recién configurado
         GuacamoleTunnel tunnel = new SimpleGuacamoleTunnel(socket);
 
-        // Attach tunnel
+        // Adjuntar el tunel a la sesión
         GuacamoleSession session = new GuacamoleSession(httpSession);
         session.attachTunnel(tunnel);
 

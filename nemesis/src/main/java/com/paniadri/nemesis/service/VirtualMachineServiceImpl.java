@@ -19,13 +19,15 @@ public class VirtualMachineServiceImpl implements VirtualMachineService{
 	private static Log log = LogFactory.getLog(VirtualMachineServiceImpl.class);
 	
 	Client oneClient;
+	//Las credenciales también pueden ser accedidas desde la variable $ONE_AUTH
+	//si no se especifican, además de otros medios.
     String credenciales = "oneadmin:casa";
     
 	@Override
 	public void addVM(int numeroEscenario) {
 		
 		try{
-			oneClient = new Client(credenciales,null);
+			oneClient = new Client(credenciales, null);
 			String vmTemplate;
 			
 			if(numeroEscenario == 1 || numeroEscenario == 2){
@@ -46,18 +48,19 @@ public class VirtualMachineServiceImpl implements VirtualMachineService{
 				throw new Exception("Numero de escenario no implementado");
 			}
 			
-			System.out.println("Virtual Machine Template:\n" + vmTemplate);
-            System.out.println();
+			log.info("VM Template:\n" + vmTemplate+"\n");
 
-            System.out.print("Trying to allocate the virtual machine... ");
+            log.info("Trying to allocate the virtual machine... ");
             OneResponse rc = VirtualMachine.allocate(oneClient, vmTemplate);
 
-            if( rc.isError() )
-            {
-                System.out.println( "failed!");
+            if( rc.isError()){
+                log.error( "falló!");
                 throw new Exception( rc.getErrorMessage() );
             }
-
+            
+            //Después de esto pasa a manos del scheduler de OpenNebula, que lo asignará
+            // al nodo que satisfaga los requerimientos marcados en la template.
+            
 		}catch (Exception e){
 			log.error("Excepción "+e.toString());
 		}
@@ -66,13 +69,12 @@ public class VirtualMachineServiceImpl implements VirtualMachineService{
 	@Override
 	public void deleteVM(int numeroVM) {
 		try{
-			oneClient = new Client(credenciales,null);
+			oneClient = new Client(credenciales, null);
 			
 			VirtualMachine vm = new VirtualMachine(numeroVM, oneClient);
 			OneResponse rc = vm.delete();
 			
-			if( rc.isError() )
-            {
+			if( rc.isError()){
 				log.error(rc.getErrorMessage());
             }
 		}catch (Exception e){
@@ -83,36 +85,34 @@ public class VirtualMachineServiceImpl implements VirtualMachineService{
 	@Override
 	public List<VirtualMachineModel> listVMs() throws Exception {
 		
-		oneClient = new Client(credenciales,null);
+		oneClient = new Client(credenciales, null);
 		
 		ArrayList<VirtualMachineModel> lista = new ArrayList<VirtualMachineModel>();
 		
 		VirtualMachinePool vmPool = new VirtualMachinePool(oneClient);
-        // Remember that we have to ask the pool to retrieve the information
-        // from OpenNebula
+
+		// Le pedimos a la MachinePool que nos facilite la informacion desde OpenNebula
 		OneResponse rc = vmPool.info();
 
         if(rc.isError())
             throw new Exception( rc.getErrorMessage() );
 
-        System.out.println(
-                "\nThese are all the Virtual Machines in the pool:");
+        log.info("\nVMs en la Pool:");
         
         for ( VirtualMachine vmachine : vmPool )
         {
         	lista.add(new VirtualMachineModel(
-        			vmachine,
         			vmachine.getId(),
         			vmachine.xpath("TEMPLATE/GRAPHICS/PORT"),
         			vmachine.getName(),
         			vmachine.stateStr(),
         			vmachine.xpath("HISTORY_RECORDS/HISTORY/HOSTNAME")));
         	
-            System.out.println("\tID :" + vmachine.getId() +
-                               ", Nombre :" + vmachine.getName()+
-                               ", Puerto :" + vmachine.xpath("TEMPLATE/GRAPHICS/PORT")+
-                               ", Estado :" + vmachine.stateStr()+
-                               ", Hostname :"+ vmachine.xpath("HISTORY_RECORDS/HISTORY/HOSTNAME"));
+        	log.info("\tID :" + vmachine.getId() +
+                   ", Nombre :" + vmachine.getName()+
+                   ", Puerto :" + vmachine.xpath("TEMPLATE/GRAPHICS/PORT")+
+                   ", Estado :" + vmachine.stateStr()+
+                   ", Hostname :"+ vmachine.xpath("HISTORY_RECORDS/HISTORY/HOSTNAME"));
         }
         
 		return lista;

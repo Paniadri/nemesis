@@ -64,7 +64,7 @@
 		<form:form class="form-inline" method="post" action="delete" commandName="vm">
 			<div class="form-group">
 				<label for="id">ID </label>
-		    	<form:select  items="${vms}" path="id" itemLabel="vm.id" itemValue="vm.id"/>
+		    	<form:select  items="${vms}" path="id" itemLabel="id" itemValue="id"/>
 		    </div>
 		     <div class="form-group">
 			    <button type="submit" type="submit" class="btn btn-primary">Eliminar</button>
