@@ -36,7 +36,7 @@ public class VirtualMachineServiceImpl implements VirtualMachineService{
 		                + "CPU = 1  VCPU = 1  MEMORY = 1532\n"
 		                + "DISK     = [ IMAGE  = \"VNX image\" ]\n"
 		                + "OS       = [ ARCH = x86_64 ]\n"
-		                + "# NIC    = [ NETWORK = \"Non existing network\" ]\n"
+		                + "# NIC    = [ NETWORK = \"prueba\" ]\n"
 		                + "GRAPHICS = [ TYPE = \"vnc\",  LISTEN = \"0.0.0.0\"]\n"
 		                + "CONTEXT  = [\n"
 		                + "\tFILES  = \"/var/lib/one/scripts/escenario"+numeroEscenario+"/init.sh\",\n"
@@ -97,7 +97,7 @@ public class VirtualMachineServiceImpl implements VirtualMachineService{
         if(rc.isError())
             throw new Exception( rc.getErrorMessage() );
 
-        log.info("\nVMs en la Pool:");
+        log.info("VMs en la Pool:");
         
         for ( VirtualMachine vmachine : vmPool )
         {
@@ -106,12 +106,14 @@ public class VirtualMachineServiceImpl implements VirtualMachineService{
         			vmachine.xpath("TEMPLATE/GRAPHICS/PORT"),
         			vmachine.getName(),
         			vmachine.stateStr(),
+        			vmachine.lcmStateStr(),
         			vmachine.xpath("HISTORY_RECORDS/HISTORY/HOSTNAME")));
         	
         	log.info("\tID :" + vmachine.getId() +
                    ", Nombre :" + vmachine.getName()+
                    ", Puerto :" + vmachine.xpath("TEMPLATE/GRAPHICS/PORT")+
                    ", Estado :" + vmachine.stateStr()+
+                   ", Estado LCM :" + vmachine.lcmStateStr()+
                    ", Hostname :"+ vmachine.xpath("HISTORY_RECORDS/HISTORY/HOSTNAME"));
         }
         

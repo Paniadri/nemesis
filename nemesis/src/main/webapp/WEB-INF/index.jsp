@@ -22,7 +22,8 @@
 		  <tr>
 		     <th>ID</th>
 		     <th>Nombre</th>
-		     <th>Status</th>
+		     <th>Estado</th>
+		     <th>LCM</th>
 		     <th>Puerto</th>
 		     <th>Hostname</th>
 		  </tr>
@@ -33,6 +34,7 @@
 		            <td>${vm.id}</td>
 		            <td>${vm.name}</td>
 		            <td>${vm.status}</td>
+		            <td>${vm.lcm}</td>
 		            <td>${vm.port}</td>
 		            <td>${vm.host}</td>
 	            </tr>
@@ -47,8 +49,8 @@
 	  <div class="panel-body">
 		  <form:form class="form-inline" method="post" action="add" commandName="escenario">
 	    	<div class="form-group">
-			  <form:radiobutton path="numeroEscenario" value="1"/> 1
-			  <form:radiobutton path="numeroEscenario" value="2"/> 2
+			  <form:radiobutton path="numeroEscenario" value="1"/> simple_lxc_ubuntu
+			  <form:radiobutton path="numeroEscenario" value="2"/> tutorial_lxc_ubuntu
 		 	</div>
 		 	
 		    <div class="form-group">

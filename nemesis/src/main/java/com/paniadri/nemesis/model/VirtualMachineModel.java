@@ -10,14 +10,17 @@ public class VirtualMachineModel {
 	
 	String status;
 	
+	String lcm;
+	
 	String host;
 	
-	public VirtualMachineModel(String id, String port, String name, String status, String host) {
+	public VirtualMachineModel(String id, String port, String name, String status, String lcm, String host) {
 		super();
 		this.id = id;
 		this.port = port;
 		this.name = name;
 		this.status = status;
+		this.lcm = lcm;
 		this.host = host;
 	}
 	
@@ -67,4 +70,12 @@ public class VirtualMachineModel {
 		this.host = host;
 	}
 
+	public String getLcm() {
+		return lcm;
+	}
+
+	public void setLcm(String lcm) {
+		this.lcm = lcm;
+	}
+	
 }
