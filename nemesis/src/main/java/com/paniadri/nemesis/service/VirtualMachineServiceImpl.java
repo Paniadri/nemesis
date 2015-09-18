@@ -29,20 +29,23 @@ public class VirtualMachineServiceImpl implements VirtualMachineService{
 		try{
 			oneClient = new Client(credenciales, null);
 			String vmTemplate;
+			String nombreEscenario="";
 			
 			if(numeroEscenario == 1 || numeroEscenario == 2){
+				
+				if (numeroEscenario == 1) nombreEscenario="_simple_lxc";
+				if (numeroEscenario == 2) nombreEscenario="_tutorial_lxc";
 				vmTemplate =
-		                  "NAME     = escenario"+numeroEscenario+"\n"
-		                + "CPU = 1  VCPU = 1  MEMORY = 1532\n"
-		                + "DISK     = [ IMAGE  = \"VNX image\" ]\n"
-		                + "OS       = [ ARCH = x86_64 ]\n"
-		                + "# NIC    = [ NETWORK = \"prueba\" ]\n"
+		                  "NAME     = escenario"+nombreEscenario+"\n"
+		                + "CPU = 1  MEMORY = 1532\n"
+		                + "DISK     = [ IMAGE  = \"vnx image\" ]\n"
+		                + "NIC    = [ NETWORK = \"privada\" ]\n"
 		                + "GRAPHICS = [ TYPE = \"vnc\",  LISTEN = \"0.0.0.0\"]\n"
 		                + "CONTEXT  = [\n"
 		                + "\tFILES  = \"/var/lib/one/scripts/escenario"+numeroEscenario+"/init.sh\",\n"
 		                + "\tNETWORK  = \"YES\",\n"
 		                + "\tUSERNAME  = \"vnx\",\n"
-						+ "\tSSH_PUBLIC_KEY  = \"VNX image\" ]\n";
+						+ "\tSSH_PUBLIC_KEY  = \"$USER[SSH_PUBLIC_KEY]\" ]\n";
 			}else{
 				log.error("Numero de escenario no implementado: "+numeroEscenario);
 				throw new Exception("Numero de escenario no implementado");

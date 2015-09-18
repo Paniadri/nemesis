@@ -24,29 +24,29 @@
         <!-- Init -->
         <script type="text/javascript"> /* <![CDATA[ */
 	   
-		// Get display div from document
+		// Extraer el display del document
        var display = document.getElementById("display");
         
-    	// Instantiate client, using an HTTP tunnel for communications.
+    	// instanciar el client, usando un tunel http para comunicaciones.
        var guac = new Guacamole.Client(
            new Guacamole.HTTPTunnel("tunnel")
        );
     	
-   		// Add client to display div
+   		// Añadir el cliente al div que hemos designado
        display.appendChild(guac.getDisplay().getElement());
     
    		//ver a que nos conectamos
        var data= "direccion=" + "${direccion}"
        + "&puerto=" + "${puerto}"
-       // Connect client
+       // nos conectamos
        guac.connect(data);	
    	
-    	// Error handler
+    	// Manejador de errores
        guac.onerror = function(error) {
            alert(error);
        };
    		
-   		 // Disconnect on close
+   		 // Desconectarse al cerrar
        window.onunload = function() {
            guac.disconnect();
        }
